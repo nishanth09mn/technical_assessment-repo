@@ -12,18 +12,11 @@ describe('cypress test', () => {
       ];
   
       const jsonString = JSON.stringify(jsonData, null, 2);
-  
-      cy.get("textarea[id='jsondata']")
-        .clear()
-        .type(jsonString);
-      
+      cy.get("textarea[id='jsondata']").clear().type(jsonString);
       cy.get('button[id="refreshtable"]').click();
       
       // Wait for the table to be visible
       cy.get('table').should('be.visible');
-      
-      // Optional: Check that the correct number of rows is displayed
-      //cy.get('tr').should('have.length', jsonData.length);
       
       jsonData.forEach((item, index) => {
         cy.get('tr').eq(index + 1).within(() => { // Adjusting for header row
